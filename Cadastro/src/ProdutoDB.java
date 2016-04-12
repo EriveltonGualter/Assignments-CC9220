@@ -2,8 +2,8 @@ public class ProdutoDB {
    private Produto Produtos[] = new Produto[20];
    
    public ProdutoDB(){
-      incluir("12","Laptop");
-      incluir("23","Mouse");
+//      incluir("12","Laptop");
+//      incluir("23","Mouse");
    }
    
    public boolean incluir( String id, String descricao) {

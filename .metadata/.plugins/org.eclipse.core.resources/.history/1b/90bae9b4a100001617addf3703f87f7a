@@ -1,0 +1,81 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class PessoaInterfaceGrafico extends JFrame implements ActionListener {
+
+	JLabel rotuloCpf 			= new JLabel("CPF:");
+	JTextField textoCpf 		= new JTextField(10);
+	JButton botaoIncluir 		= new JButton("Incluir");
+	JLabel rotuloNome 			= new JLabel("Nome:");
+	JTextField textoNome 		= new JTextField(20);
+	JButton botaoConsultar 		= new JButton("Consultar");
+	JLabel rotuloEndereco 		= new JLabel("Endereco:");
+	JTextField textoEndereco 	= new JTextField(20);
+	JButton botaoAlterar 		= new JButton("Alterar");
+	JLabel rotuloTelefone 		= new JLabel("Telefone:");
+	JTextField textoTelefone 	= new JTextField(10);
+	JButton botaoExcluir 		= new JButton("Excluir");
+	JLabel rotuloMensagem1 		= new JLabel("Mensagem:");
+	JLabel rotuloMensagem2 		= new JLabel("Digite e escolha sua opção");
+	JButton botaoLimpa 			= new JButton("Limpa");
+
+	public PessoaInterfaceGrafico() { // construtor
+
+		Container caixa = getContentPane();
+		caixa.setLayout(new GridLayout(5, 3));		// Define size of the Layout 5x3
+
+		botaoIncluir.addActionListener(this);
+		botaoConsultar.addActionListener(this);
+		botaoAlterar.addActionListener(this);
+		botaoExcluir.addActionListener(this);
+		botaoLimpa.addActionListener(this);
+
+		caixa.add(rotuloCpf);
+		caixa.add(textoCpf);
+		caixa.add(botaoIncluir);
+		caixa.add(rotuloNome);
+		caixa.add(textoNome);
+		caixa.add(botaoConsultar);
+		caixa.add(rotuloEndereco);
+		caixa.add(textoEndereco);
+		caixa.add(botaoAlterar);
+		caixa.add(rotuloTelefone);
+		caixa.add(textoTelefone);
+		caixa.add(botaoExcluir);
+		caixa.add(rotuloMensagem1);
+		caixa.add(rotuloMensagem2);
+		caixa.add(botaoLimpa);
+
+		setTitle("Cadastro de Clientes");
+		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		pack();
+
+	} // end construtor Esqueleto
+
+	public void actionPerformed(ActionEvent evento) {
+
+		if (evento.getSource() == botaoIncluir) {
+			rotuloMensagem2.setText("Botão INCLUIR Pressionado");
+
+		} else if (evento.getSource() == botaoConsultar) {
+			rotuloMensagem2.setText("Botão CONSULTAR Pressionado"); 
+			
+		} else if (evento.getSource() == botaoAlterar) {
+			rotuloMensagem2.setText("Botão ALTERAR Pressionado");
+			
+		} else if (evento.getSource() == botaoExcluir) {
+			rotuloMensagem2.setText("Botão EXCLUIR Pressionado");
+			
+		} else if (evento.getSource() == botaoLimpa) {
+			rotuloMensagem2.setText("Botão LIMPA Pressionado");
+			}
+
+	} // end actionPerformed
+	
+	public static void main(String args[]) {
+		PessoaInterfaceGrafico esqueleto = new PessoaInterfaceGrafico();
+	} // end main
+
+} // end class PessoaInterfaceGrafico
