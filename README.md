@@ -4,6 +4,11 @@ Here I post the assignments I worked in this class. The main assignment consist 
 
 	* Cadastro: contains the interface, database, and etc.
 	* ProductDataBase: Code developed to practice before the exame. It is manage the actions os the inventory.
+	* EasyShoopingSoftware: Final project for the class.
+<<<<<<< HEAD
 	
 	
 
+=======
+	* 
+>>>>>>> ce30cc60b8b896ded648bcaf385257b6dc98382f
