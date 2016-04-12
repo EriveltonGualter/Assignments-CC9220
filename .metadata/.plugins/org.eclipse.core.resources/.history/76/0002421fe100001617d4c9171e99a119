@@ -1,0 +1,95 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class PessoaInterfaceGrafico extends JFrame implements ActionListener {
+
+	JLabel rotuloCpf 			= new JLabel("CPF:");
+	JLabel rotuloNome 			= new JLabel("Nome:");
+	JLabel rotuloVazio01 		= new JLabel("");
+	JLabel rotuloVazio02 		= new JLabel("");
+	JLabel rotuloVazio03 		= new JLabel("");
+	JLabel rotuloVazio04 		= new JLabel("");
+	JLabel rotuloVazio05 		= new JLabel("");
+	JLabel rotuloVazio06 		= new JLabel("");
+	JLabel rotuloVazio07 		= new JLabel("");
+	JLabel rotuloVazio08 		= new JLabel("");
+	JTextField textoCpf 		= new JTextField(10);
+	JTextField textoNome 		= new JTextField(20);
+	JLabel rotuloMensagem1 		= new JLabel("Mensagem:");
+	JLabel rotuloMensagem2 		= new JLabel("Digite e escolha sua opção");
+	
+	JButton botaoIncluir 		= new JButton("Incluir");
+	JButton botaoConsultar 		= new JButton("Consultar");
+	JButton botaoAlterar 		= new JButton("Alterar");
+	JButton botaoExcluir 		= new JButton("Excluir");
+	JButton botaoLimpa 			= new JButton("Limpa");
+	JButton botaoListar			= new JButton("Listar Todos");
+	
+	public PessoaInterfaceGrafico() { // construtor
+
+		Container caixa = getContentPane();
+		caixa.setLayout(new GridLayout(6, 3));		// Define size of the Layout 5x3
+
+		botaoIncluir.addActionListener(this);
+		botaoConsultar.addActionListener(this);
+		botaoAlterar.addActionListener(this);
+		botaoExcluir.addActionListener(this);
+		botaoLimpa.addActionListener(this);
+		botaoListar.addActionListener(this);
+
+		caixa.add(rotuloCpf);
+		caixa.add(textoCpf);
+		caixa.add(botaoIncluir);
+		caixa.add(rotuloNome);
+		caixa.add(textoNome);
+		caixa.add(botaoConsultar);
+		caixa.add(rotuloVazio01);
+		caixa.add(rotuloVazio02);
+		caixa.add(botaoAlterar);
+		caixa.add(rotuloVazio03);
+		caixa.add(rotuloVazio04);
+		caixa.add(botaoExcluir);
+		caixa.add(rotuloVazio05);
+		caixa.add(rotuloVazio06);
+		caixa.add(botaoListar);
+		caixa.add(rotuloMensagem1);
+		caixa.add(rotuloMensagem2);
+		caixa.add(botaoLimpa);
+
+		setTitle("Cadastro de Pessoas");
+		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		pack();
+
+	} // end construtor PessoaInterfaceGrafico
+
+	public void actionPerformed(ActionEvent evento) {
+
+		if (evento.getSource() == botaoIncluir) {
+			
+			
+			rotuloMensagem2.setText("Botão INCLUIR Pressionado");
+
+		} else if (evento.getSource() == botaoConsultar) {
+			rotuloMensagem2.setText("Botão CONSULTAR Pressionado"); 
+			
+		} else if (evento.getSource() == botaoAlterar) {
+			rotuloMensagem2.setText("Botão ALTERAR Pressionado");
+			
+		} else if (evento.getSource() == botaoExcluir) {
+			rotuloMensagem2.setText("Botão EXCLUIR Pressionado");
+			
+		} else if (evento.getSource() == botaoLimpa) {
+			rotuloMensagem2.setText("Botão LIMPA Pressionado");
+		} else if (evento.getSource() == botaoListar) {
+			rotuloMensagem2.setText("Botão LISTAR Pressionado");
+		}
+
+	} // end actionPerformed
+	
+//	public static void main(String args[]) {
+//		PessoaInterfaceGrafico pessoaInterfaceGrafico = new PessoaInterfaceGrafico();
+//	} // end main
+
+} // end class PessoaInterfaceGrafico

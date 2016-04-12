@@ -1,0 +1,51 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class LoginInterface extends JFrame implements ActionListener {
+
+	JLabel rotuloUsuário		= new JLabel("Usuário:");
+	JLabel rotuloSenha			= new JLabel("Senha:");
+	JLabel rotuloStatus			= new JLabel("<Status>");
+	JLabel rotuloVazio01 		= new JLabel("");
+	JLabel rotuloVazio02 		= new JLabel("");
+	JTextField textoUsuario		= new JTextField(10);
+	JTextField textoSenha 		= new JTextField(20);
+	
+	JButton botaoEnter	 		= new JButton("Enter");
+	
+	public LoginInterface() { // construtor
+
+		Container caixa = getContentPane();
+		caixa.setLayout(new GridLayout(7, 1));		// Define size of the Layout 5x3
+
+		botaoEnter.addActionListener(this);
+
+		caixa.add(rotuloUsuário, BorderLayout.CENTER);
+		caixa.add(textoUsuario);
+		caixa.add(rotuloVazio01);
+		caixa.add(rotuloSenha);
+		caixa.add(textoSenha);
+		caixa.add(rotuloStatus);
+		caixa.add(botaoEnter);
+
+		setTitle("Cadastro de Pessoas");
+		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		pack();
+
+	} // end construtor PessoaInterfaceGrafico
+
+	public void actionPerformed(ActionEvent evento) {
+
+		if (evento.getSource() == botaoEnter) {
+			rotuloStatus.setText("Botão ENTER Pressionado");
+		}
+
+	} // end actionPerformed
+	
+	public static void main(String args[]) {
+		LoginInterface loginInterface = new LoginInterface();
+	} // end main
+
+} // end class PessoaInterfaceGrafico

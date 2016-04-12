@@ -1,0 +1,77 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class LoginInterface extends JFrame implements ActionListener {
+
+	JLabel rotuloUsuário		= new JLabel("Usuário:");
+	JLabel rotuloSenha			= new JLabel("Senha:");
+	JLabel rotuloStatus			= new JLabel("<Status>");
+	JLabel rotuloVazio01 		= new JLabel("");
+	JLabel rotuloVazio02 		= new JLabel("");
+	JTextField textoUsuario		= new JTextField(10);
+	JTextField textoSenha 		= new JTextField(20);
+	
+	JButton botaoIncluir 		= new JButton("Incluir");
+	JButton botaoConsultar 		= new JButton("Consultar");
+	JButton botaoAlterar 		= new JButton("Alterar");
+	JButton botaoExcluir 		= new JButton("Excluir");
+	JButton botaoLimpa 			= new JButton("Limpa");
+	JButton botaoListar			= new JButton("Listar Todos");
+	
+	public LoginInterface() { // construtor
+
+		Container caixa = getContentPane();
+		caixa.setLayout(new GridLayout(6, 1));		// Define size of the Layout 5x3
+
+		botaoIncluir.addActionListener(this);
+		botaoConsultar.addActionListener(this);
+		botaoAlterar.addActionListener(this);
+		botaoExcluir.addActionListener(this);
+		botaoLimpa.addActionListener(this);
+		botaoListar.addActionListener(this);
+
+		caixa.add(rotuloUsuário, BorderLayout.CENTER);
+		caixa.add(textoUsuario);
+		caixa.add(rotuloVazio01);
+		caixa.add(rotuloSenha);
+		caixa.add(textoSenha);
+		caixa.add(rotuloStatus);
+
+
+		setTitle("Cadastro de Pessoas");
+		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		pack();
+
+	} // end construtor PessoaInterfaceGrafico
+
+	public void actionPerformed(ActionEvent evento) {
+
+		if (evento.getSource() == botaoIncluir) {
+			
+			
+			rotuloMensagem2.setText("Botão INCLUIR Pressionado");
+
+		} else if (evento.getSource() == botaoConsultar) {
+			rotuloMensagem2.setText("Botão CONSULTAR Pressionado"); 
+			
+		} else if (evento.getSource() == botaoAlterar) {
+			rotuloMensagem2.setText("Botão ALTERAR Pressionado");
+			
+		} else if (evento.getSource() == botaoExcluir) {
+			rotuloMensagem2.setText("Botão EXCLUIR Pressionado");
+			
+		} else if (evento.getSource() == botaoLimpa) {
+			rotuloMensagem2.setText("Botão LIMPA Pressionado");
+		} else if (evento.getSource() == botaoListar) {
+			rotuloMensagem2.setText("Botão LISTAR Pressionado");
+		}
+
+	} // end actionPerformed
+	
+	public static void main(String args[]) {
+		LoginInterface loginInterface = new LoginInterface();
+	} // end main
+
+} // end class PessoaInterfaceGrafico
