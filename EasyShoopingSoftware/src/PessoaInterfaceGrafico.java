@@ -1,4 +1,5 @@
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -25,6 +26,8 @@ public class PessoaInterfaceGrafico extends JFrame implements ActionListener {
 	JButton botaoExcluir 		= new JButton("Excluir");
 	JButton botaoLimpa 			= new JButton("Limpa");
 	JButton botaoListar			= new JButton("Listar Todos");
+	
+	Pessoa pessoa = new Pessoa();
 	
 	public PessoaInterfaceGrafico() { // construtor
 
@@ -67,7 +70,8 @@ public class PessoaInterfaceGrafico extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent evento) {
 
 		if (evento.getSource() == botaoIncluir) {
-			
+			String cpf 	= textoCpf.getText();
+			String nome = textoNome.getText();
 			
 			rotuloMensagem2.setText("Botão INCLUIR Pressionado");
 
@@ -82,8 +86,10 @@ public class PessoaInterfaceGrafico extends JFrame implements ActionListener {
 			
 		} else if (evento.getSource() == botaoLimpa) {
 			rotuloMensagem2.setText("Botão LIMPA Pressionado");
+			
 		} else if (evento.getSource() == botaoListar) {
 			rotuloMensagem2.setText("Botão LISTAR Pressionado");
+			
 		}
 
 	} // end actionPerformed

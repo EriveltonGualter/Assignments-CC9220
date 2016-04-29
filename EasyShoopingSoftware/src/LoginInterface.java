@@ -46,8 +46,12 @@ public class LoginInterface extends JFrame implements ActionListener {
 			String usuario = textoUsuario.getText();
 			char[] senha = passwordField.getPassword();
 			
-			if (senhaCorrera(senha))
+			if (passwordVerify(senha))
+			{
+				this.setVisible(false);
+			   	new TelaGerente().setVisible(true);
 				rotuloStatus.setText("SENHA CORRETA");
+			}
 			else
 				rotuloStatus.setText("Senha INCORRETA");
 			//rotuloStatus.setText("Botão ENTER Pressionado");
@@ -55,7 +59,20 @@ public class LoginInterface extends JFrame implements ActionListener {
 
 	} // end actionPerformed
 	
-    private static boolean senhaCorrera (char[] input) {
+	private static boolean loginVerify (String input) {
+        boolean isCorrect = true;
+        String correctLogin = "erivelton";
+
+        if (input.equals(correctLogin)) {
+            isCorrect = true;
+        } else {
+            isCorrect = false;
+        }
+        
+        return isCorrect;
+    }
+    
+    private static boolean passwordVerify (char[] input) {
         boolean isCorrect = true;
         char[] correctPassword = { 'e', 'r', 'i', 'v', 'e', 'l', 't', 'o', 'n' };
 
