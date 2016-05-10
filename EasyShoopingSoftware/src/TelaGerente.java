@@ -14,6 +14,9 @@ public class TelaGerente extends JFrame implements ActionListener {
 	JLabel rVazio1 		= new JLabel("");
 	JLabel rVazio2 		= new JLabel("");
 	
+    PessoaDB dbpessoa 	= new PessoaDB();
+    ProdutoDB dbproduto = new ProdutoDB();
+	
 	public TelaGerente() {
 		
 		Container windows = getContentPane();
@@ -31,8 +34,8 @@ public class TelaGerente extends JFrame implements ActionListener {
 		windows.add(btnFuncionario);
 		windows.add(btnLogoff);
 		
-		TelaEstoque telaEstoque 		= new TelaEstoque();
-		TelaFuncionario telaFuncionario = new TelaFuncionario();
+		TelaEstoque 	telaEstoque 	= new TelaEstoque(dbproduto);
+		TelaFuncionario telaFuncionario = new TelaFuncionario(dbpessoa);
 		
 		setTitle("Tela Principal - Gerente");
 		setVisible(true);
@@ -43,15 +46,16 @@ public class TelaGerente extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent evento) {
 
 		if (evento.getSource() == btnEstoque) {
-			TelaEstoque.open();
+			TelaEstoque.open(dbproduto);
 			
 		} else if (evento.getSource() == btnFuncionario) {
-			TelaFuncionario.open();
+			TelaFuncionario.open(dbpessoa);
 		   	
 		} else if (evento.getSource() == btnFinanceiro) {
 			
 		} else if (evento.getSource() == btnLogoff) {
-			
+			setVisible(false); 
+			dispose();
 		}
 	}
 	

@@ -3,13 +3,17 @@ public class Pessoa
    // Atributo
    private String cpf;
    private String nome;
-   private Data dataNasc;
-   
+   private String funcao;
+   private String turno;
+   private int idade;
+
    // Construtor
-   Pessoa (String c, String n, Data dt) {
+   Pessoa (String c, String n, String f, String t, int i) {
       cpf = c;
       nome = n;
-      dataNasc = dt;
+      funcao = f;
+      turno = t;
+      idade = i;
    }
    Pessoa() {
    }
@@ -25,18 +29,16 @@ public class Pessoa
       nome = b;
    }
    
-   public void setData(int d, int m, int a){
-	   dataNasc.setDia(d);
-	   dataNasc.setMes(m);
-	   dataNasc.setAno(a);
+   public void setFuncao (String f){
+	   funcao = f;
    }
    
-   public String getData(){
-	   return (dataNasc.getData());
+   public void setTurno (String t) {
+	   turno = t;
    }
    
-   public String getDias(){
-	   return (dataNasc.getDias());
+   public void setIdade (int i) {
+	   idade = i;
    }
    
    public String getCpf()
@@ -49,8 +51,15 @@ public class Pessoa
       return nome;
    }
    
-   public void exibirAtributos()
-   {
-      System.out.printf("\n CPF = %s \n Nome = %s", getCpf(), getNome());
+   public String getFuncao(){
+	   return funcao;
+   }
+   
+   public String getTurno() {
+	   return turno;
+   }
+   
+   public int getIdade() {
+	   return idade;
    }
 } // Classe Quadrado

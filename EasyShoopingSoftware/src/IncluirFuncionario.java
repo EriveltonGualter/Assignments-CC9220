@@ -19,7 +19,7 @@ public class IncluirFuncionario {
 	private JTextField txtcpf;
 	private JTextField txtnome;
 	private JTextField txtsenha;
-	private JTextField txtfuno;
+	private JTextField txtfuncao;
 	private JTextField txtturno;
 	private JTextField txtidade;
 
@@ -112,12 +112,12 @@ public class IncluirFuncionario {
 		txtsenha.setBounds(82, 89, 122, 33);
 		frmIncluirFuncionario.getContentPane().add(txtsenha);
 		
-		txtfuno = new JTextField();
-		txtfuno.setText("(Fun\u00E7\u00E3o)");
-		txtfuno.setHorizontalAlignment(SwingConstants.CENTER);
-		txtfuno.setColumns(10);
-		txtfuno.setBounds(82, 128, 122, 33);
-		frmIncluirFuncionario.getContentPane().add(txtfuno);
+		txtfuncao = new JTextField();
+		txtfuncao.setText("(Fun\u00E7\u00E3o)");
+		txtfuncao.setHorizontalAlignment(SwingConstants.CENTER);
+		txtfuncao.setColumns(10);
+		txtfuncao.setBounds(82, 128, 122, 33);
+		frmIncluirFuncionario.getContentPane().add(txtfuncao);
 		
 		txtturno = new JTextField();
 		txtturno.setText("(Turno)");
@@ -138,8 +138,11 @@ public class IncluirFuncionario {
 			public void actionPerformed(ActionEvent e) {
 				String cpf 	= txtcpf.getText();
 				String nome = txtnome.getText();
+				String turno = txtturno.getText();
+				String funcao = txtfuncao.getText();
+				int idade = Integer.parseInt(txtidade.getText());
 				
-				if(dbpessoa.incluir(cpf, nome, null))
+				if(dbpessoa.incluir(cpf, nome, funcao, turno, idade))
 					lblstatus.setText("INSERIDA");
                 else
                 	lblstatus.setText("NÃO INSERIDA");				

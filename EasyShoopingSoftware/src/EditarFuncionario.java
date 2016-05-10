@@ -5,9 +5,12 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Window.Type;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class EditarFuncionario {
@@ -16,18 +19,18 @@ public class EditarFuncionario {
 	private JTextField txtcpf;
 	private JTextField txtnome;
 	private JTextField txtsenha;
-	private JTextField txtfuno;
+	private JTextField txtfuncao;
 	private JTextField txtturno;
 	private JTextField txtidade;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void open() {
+	public static void open(PessoaDB dbpessoa) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EditarFuncionario window = new EditarFuncionario();
+					EditarFuncionario window = new EditarFuncionario(dbpessoa);
 					window.frmEditarFuncionario.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,19 +42,29 @@ public class EditarFuncionario {
 	/**
 	 * Create the application.
 	 */
-	public EditarFuncionario() {
-		initialize();
+	public EditarFuncionario(PessoaDB dbpessoa) {
+		initialize(dbpessoa);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(PessoaDB dbpessoa) {
 		frmEditarFuncionario = new JFrame();
 		frmEditarFuncionario.setType(Type.UTILITY);
 		frmEditarFuncionario.setTitle("Editar Funcionario");
 		frmEditarFuncionario.setBounds(100, 100, 359, 396);
 		frmEditarFuncionario.getContentPane().setLayout(null);
+		
+		JLabel lbl_status1 = new JLabel("<Status>");
+		lbl_status1.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_status1.setBounds(92, 55, 95, 23);
+		frmEditarFuncionario.getContentPane().add(lbl_status1);
+		
+		JLabel lbl_status2 = new JLabel("<Status>");
+		lbl_status2.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_status2.setBounds(226, 285, 95, 23);
+		frmEditarFuncionario.getContentPane().add(lbl_status2);
 		
 		JLabel lblCpf = new JLabel("CPF:");
 		lblCpf.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -104,12 +117,12 @@ public class EditarFuncionario {
 		txtsenha.setBounds(82, 128, 122, 33);
 		frmEditarFuncionario.getContentPane().add(txtsenha);
 		
-		txtfuno = new JTextField();
-		txtfuno.setText("(Fun\u00E7\u00E3o)");
-		txtfuno.setHorizontalAlignment(SwingConstants.CENTER);
-		txtfuno.setColumns(10);
-		txtfuno.setBounds(82, 167, 122, 33);
-		frmEditarFuncionario.getContentPane().add(txtfuno);
+		txtfuncao = new JTextField();
+		txtfuncao.setText("(Fun\u00E7\u00E3o)");
+		txtfuncao.setHorizontalAlignment(SwingConstants.CENTER);
+		txtfuncao.setColumns(10);
+		txtfuncao.setBounds(82, 167, 122, 33);
+		frmEditarFuncionario.getContentPane().add(txtfuncao);
 		
 		txtturno = new JTextField();
 		txtturno.setText("(Turno)");
@@ -125,33 +138,63 @@ public class EditarFuncionario {
 		txtidade.setBounds(82, 245, 122, 33);
 		frmEditarFuncionario.getContentPane().add(txtidade);
 		
-		JButton button = new JButton("Adicionar");
-		button.setFont(new Font("Tahoma", Font.BOLD, 11));
-		button.setBackground(new Color(135, 206, 250));
-		button.setBounds(82, 285, 122, 23);
-		frmEditarFuncionario.getContentPane().add(button);
+		JButton btn_salvar = new JButton("Salvar");
+		btn_salvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String cpf = txtcpf.getText();
+				String nome = txtnome.getText();
+				String funcao = txtfuncao.getText();
+				String turno = txtturno.getText();
+				int idade = Integer.parseInt(txtidade.getText());
+				
+                if (dbpessoa.alterar(cpf, nome, funcao, turno, idade)) {
+                	lbl_status2.setText("Alterado");
+                }
+                else {
+                	lbl_status2.setText("N'ao Alterado");
+                }
+			}
+		});
+		btn_salvar.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btn_salvar.setBackground(new Color(135, 206, 250));
+		btn_salvar.setBounds(82, 285, 122, 23);
+		frmEditarFuncionario.getContentPane().add(btn_salvar);
 		
-		JButton button_1 = new JButton("Voltar");
-		button_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		button_1.setBackground(new Color(135, 206, 250));
-		button_1.setBounds(82, 319, 122, 23);
-		frmEditarFuncionario.getContentPane().add(button_1);
+		JButton btn_pesquisar = new JButton("Pesquisar");
+		btn_pesquisar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String cpf 	= txtcpf.getText();
+				
+				Pessoa pessoa = new Pessoa();
+				pessoa = dbpessoa.consultar(cpf);
+				
+				if (pessoa != null) {
+					lbl_status1.setText("OK");
+					txtnome.setText(pessoa.getNome());
+					txtfuncao.setText(pessoa.getFuncao());
+					txtturno.setText(pessoa.getTurno());
+					txtidade.setText(Integer.toString(pessoa.getIdade()));
+				}
+				else{
+					lbl_status1.setText("NAO EXISTE");
+				}
+			}
+		});
+		btn_pesquisar.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btn_pesquisar.setBackground(new Color(135, 206, 250));
+		btn_pesquisar.setBounds(214, 16, 122, 23);
+		frmEditarFuncionario.getContentPane().add(btn_pesquisar);
 		
-		JLabel label = new JLabel("<Status>");
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setBounds(92, 55, 95, 23);
-		frmEditarFuncionario.getContentPane().add(label);
-		
-		JButton button_2 = new JButton("Adicionar");
-		button_2.setFont(new Font("Tahoma", Font.BOLD, 11));
-		button_2.setBackground(new Color(135, 206, 250));
-		button_2.setBounds(214, 16, 122, 23);
-		frmEditarFuncionario.getContentPane().add(button_2);
-		
-		JLabel label_1 = new JLabel("<Status>");
-		label_1.setHorizontalAlignment(SwingConstants.CENTER);
-		label_1.setBounds(226, 285, 95, 23);
-		frmEditarFuncionario.getContentPane().add(label_1);
+		JButton btn_voltar = new JButton("Voltar");
+		btn_voltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmEditarFuncionario.setVisible(false);
+			}
+		});
+		btn_voltar.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btn_voltar.setBackground(new Color(135, 206, 250));
+		btn_voltar.setBounds(82, 319, 122, 23);
+		frmEditarFuncionario.getContentPane().add(btn_voltar);
 	}
 
 }

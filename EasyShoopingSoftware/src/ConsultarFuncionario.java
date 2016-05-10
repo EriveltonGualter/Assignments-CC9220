@@ -119,12 +119,14 @@ public class ConsultarFuncionario {
 				if (pessoa != null) {
 					lblstatus.setText("OK");
 					label_nome.setText(pessoa.getNome());
+					label_funcao.setText(pessoa.getFuncao());
+					label_turno.setText(pessoa.getTurno());
+					label_idade.setText(Integer.toString(pessoa.getIdade()));
 				}
 				else{
 					lblstatus.setText("NAO EXISTE");
 					label_nome.setText("");
-				}
-							
+				}		
 			}
 		});
 		btnPesquisar.setFont(new Font("Tahoma", Font.BOLD, 11));

@@ -5,9 +5,14 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Window.Type;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 public class ConsultarEstoque {
@@ -16,26 +21,27 @@ public class ConsultarEstoque {
 	private JButton btnVoltar;
 	private JLabel lblNome;
 	private JLabel lblId;
-	private JLabel label_10;
-	private JLabel label;
+	private JLabel lblstatus;
 	private JTextField txtid;
 	private JButton btnPesquisar;
-	private JLabel label_1;
-	private JLabel label_2;
-	private JLabel label_3;
-	private JLabel label_5;
-	private JLabel label_6;
-	private JLabel label_7;
-	private JLabel label_8;
+	private JLabel lbnome;
+	private JLabel lblqte;
+	private JLabel lblqtemin;
+	private JLabel lblunid;
+	private JLabel lblpv;
+	private JLabel lblpc;
+	private JLabel lblclassificacao;
+	
+	private Produto Produtos[] = new Produto[20];
 
 	/**
 	 * Launch the application.
 	 */
-	public static void open() {
+	public static void open(ProdutoDB dbproduto) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ConsultarEstoque window = new ConsultarEstoque();
+					ConsultarEstoque window = new ConsultarEstoque(dbproduto);
 					window.frmConsultarEstoque.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,14 +53,14 @@ public class ConsultarEstoque {
 	/**
 	 * Create the application.
 	 */
-	public ConsultarEstoque() {
-		initialize();
+	public ConsultarEstoque(ProdutoDB dbproduto) {
+		initialize(dbproduto);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(ProdutoDB dbproduto) {
 		frmConsultarEstoque = new JFrame();
 		frmConsultarEstoque.setType(Type.UTILITY);
 		frmConsultarEstoque.setTitle("Consultar Estoque");
@@ -91,12 +97,6 @@ public class ConsultarEstoque {
 		lblClassificao.setBounds(10, 316, 95, 33);
 		frmConsultarEstoque.getContentPane().add(lblClassificao);
 		
-		btnVoltar = new JButton("Voltar");
-		btnVoltar.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnVoltar.setBackground(new Color(135, 206, 250));
-		btnVoltar.setBounds(115, 360, 122, 23);
-		frmConsultarEstoque.getContentPane().add(btnVoltar);
-		
 		lblNome = new JLabel("Nome:");
 		lblNome.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNome.setBounds(10, 82, 95, 33);
@@ -107,62 +107,102 @@ public class ConsultarEstoque {
 		lblId.setBounds(10, 11, 95, 33);
 		frmConsultarEstoque.getContentPane().add(lblId);
 		
-		label_10 = new JLabel("<Status>");
-		label_10.setHorizontalAlignment(SwingConstants.CENTER);
-		label_10.setBounds(243, 355, 95, 33);
-		frmConsultarEstoque.getContentPane().add(label_10);
-		
-		label = new JLabel("<Status>");
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setBounds(115, 42, 122, 33);
-		frmConsultarEstoque.getContentPane().add(label);
+		lblstatus = new JLabel("<Status>");
+		lblstatus.setHorizontalAlignment(SwingConstants.CENTER);
+		lblstatus.setBounds(115, 42, 122, 33);
+		frmConsultarEstoque.getContentPane().add(lblstatus);
 		
 		txtid = new JTextField();
 		txtid.setText("(ID)");
 		txtid.setHorizontalAlignment(SwingConstants.CENTER);
 		txtid.setColumns(10);
 		txtid.setBounds(111, 11, 122, 33);
+		txtid.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e){
+            	txtid.setText("");
+            }
+		});
 		frmConsultarEstoque.getContentPane().add(txtid);
 		
+		lbnome = new JLabel("<Nome>");
+		lbnome.setHorizontalAlignment(SwingConstants.CENTER);
+		lbnome.setBounds(125, 82, 95, 33);
+		frmConsultarEstoque.getContentPane().add(lbnome);
+		
+		lblqte = new JLabel("<Quantidade>");
+		lblqte.setHorizontalAlignment(SwingConstants.CENTER);
+		lblqte.setBounds(125, 121, 95, 33);
+		frmConsultarEstoque.getContentPane().add(lblqte);
+		
+		lblqtemin = new JLabel("<Qte. min>");
+		lblqtemin.setHorizontalAlignment(SwingConstants.CENTER);
+		lblqtemin.setBounds(125, 160, 95, 33);
+		frmConsultarEstoque.getContentPane().add(lblqtemin);
+		
+		lblunid = new JLabel("<Unidade>");
+		lblunid.setHorizontalAlignment(SwingConstants.CENTER);
+		lblunid.setBounds(125, 199, 95, 33);
+		frmConsultarEstoque.getContentPane().add(lblunid);
+		
+		lblpv = new JLabel("<Pre\u00E7o da Venda>");
+		lblpv.setHorizontalAlignment(SwingConstants.CENTER);
+		lblpv.setBounds(125, 238, 95, 33);
+		frmConsultarEstoque.getContentPane().add(lblpv);
+		
+		lblpc = new JLabel("<Pre\u00E7o da Compra>");
+		lblpc.setHorizontalAlignment(SwingConstants.CENTER);
+		lblpc.setBounds(125, 277, 95, 33);
+		frmConsultarEstoque.getContentPane().add(lblpc);
+		
+		lblclassificacao = new JLabel("<Classifica\u00E7\u00E3o>");
+		lblclassificacao.setHorizontalAlignment(SwingConstants.CENTER);
+		lblclassificacao.setBounds(125, 316, 95, 33);
+		frmConsultarEstoque.getContentPane().add(lblclassificacao);
+		
+		btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmConsultarEstoque.setVisible(false);
+			}
+		});
+		btnVoltar.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnVoltar.setBackground(new Color(135, 206, 250));
+		btnVoltar.setBounds(115, 360, 122, 23);
+		frmConsultarEstoque.getContentPane().add(btnVoltar);
+		
 		btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {				
+				int id = Integer.parseInt(txtid.getText());
+
+				Produto produto = new Produto();
+				produto = dbproduto.consultar(id);
+				
+				if (produto != null) {
+					lbnome.setText(produto.getNome());
+					lblqte.setText(Integer.toString(produto.getQte()));
+					lblqtemin.setText(Integer.toString(produto.getQte_min()));
+					lblunid.setText(Integer.toString(produto.getUnidade()));
+					lblpv.setText(Integer.toString(produto.getPreco_venda()));
+					lblpc.setText(Integer.toString(produto.getPreco_compra()));
+					lblclassificacao.setText(produto.getClassificacao());
+					lblstatus.setText("Valido");
+				}
+				else{
+					lblstatus.setText("NAO EXISTE");
+					lblqte.setText("");
+					lblqtemin.setText("");
+					lblunid.setText("");
+					lblpv.setText("");
+					lblpc.setText("");
+					lblclassificacao.setText("");
+				}
+			}
+		});
 		btnPesquisar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnPesquisar.setBackground(new Color(135, 206, 250));
 		btnPesquisar.setBounds(243, 16, 122, 23);
 		frmConsultarEstoque.getContentPane().add(btnPesquisar);
-		
-		label_1 = new JLabel("<Nome>");
-		label_1.setHorizontalAlignment(SwingConstants.CENTER);
-		label_1.setBounds(125, 82, 95, 33);
-		frmConsultarEstoque.getContentPane().add(label_1);
-		
-		label_2 = new JLabel("<Quantidade>");
-		label_2.setHorizontalAlignment(SwingConstants.CENTER);
-		label_2.setBounds(125, 121, 95, 33);
-		frmConsultarEstoque.getContentPane().add(label_2);
-		
-		label_3 = new JLabel("<Qte. min>");
-		label_3.setHorizontalAlignment(SwingConstants.CENTER);
-		label_3.setBounds(125, 160, 95, 33);
-		frmConsultarEstoque.getContentPane().add(label_3);
-		
-		label_5 = new JLabel("<Unidade>");
-		label_5.setHorizontalAlignment(SwingConstants.CENTER);
-		label_5.setBounds(125, 199, 95, 33);
-		frmConsultarEstoque.getContentPane().add(label_5);
-		
-		label_6 = new JLabel("<Pre\u00E7o da Venda>");
-		label_6.setHorizontalAlignment(SwingConstants.CENTER);
-		label_6.setBounds(125, 238, 95, 33);
-		frmConsultarEstoque.getContentPane().add(label_6);
-		
-		label_7 = new JLabel("<Pre\u00E7o da Compra>");
-		label_7.setHorizontalAlignment(SwingConstants.CENTER);
-		label_7.setBounds(125, 277, 95, 33);
-		frmConsultarEstoque.getContentPane().add(label_7);
-		
-		label_8 = new JLabel("<Classifica\u00E7\u00E3o>");
-		label_8.setHorizontalAlignment(SwingConstants.CENTER);
-		label_8.setBounds(125, 316, 95, 33);
-		frmConsultarEstoque.getContentPane().add(label_8);
 	}
 }

@@ -125,6 +125,9 @@ public class DemitirFuncionario {
 				if (pessoa != null) {
 					label_status.setText("OK");
 					label_nome.setText(pessoa.getNome());
+					label_funcao.setText(pessoa.getFuncao());
+					label_turno.setText(pessoa.getTurno());
+					label_idade.setText(Integer.toString(pessoa.getIdade()));
 				}
 				else{
 					label_status.setText("NAO EXISTE");

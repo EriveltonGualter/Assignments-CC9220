@@ -3,6 +3,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
 import java.awt.Window.Type;
 import java.awt.Color;
 import java.awt.Font;
@@ -17,11 +18,11 @@ public class TelaEstoque {
 	/**
 	 * Launch the application.
 	 */
-	public static void open(){
+	public static void open(ProdutoDB dbproduto){
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TelaEstoque window = new TelaEstoque();
+					TelaEstoque window = new TelaEstoque(dbproduto);
 					window.frmEstoque.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -33,14 +34,14 @@ public class TelaEstoque {
 	/**
 	 * Create the application.
 	 */
-	public TelaEstoque() {
-		initialize();
+	public TelaEstoque(ProdutoDB dbproduto) {
+		initialize(dbproduto);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(ProdutoDB dbproduto) {
 		frmEstoque = new JFrame();
 		frmEstoque.setFont(new Font("Dialog", Font.BOLD, 12));
 		frmEstoque.getContentPane().setBackground(new Color(248, 248, 255));
@@ -54,7 +55,7 @@ public class TelaEstoque {
 		JButton btnIncluir = new JButton("Incluir");
 		btnIncluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new IncluirEstoque().open();
+				new IncluirEstoque(dbproduto).open(dbproduto);
 			}
 		});
 		btnIncluir.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -65,7 +66,7 @@ public class TelaEstoque {
 		JButton btnConsultar = new JButton("Consultar");
 		btnConsultar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new ConsultarEstoque().open();
+				new ConsultarEstoque(dbproduto).open(dbproduto);
 			}
 		});
 		btnConsultar.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -76,7 +77,7 @@ public class TelaEstoque {
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new ExcluirEstoque().open();
+				new ExcluirEstoque(dbproduto).open(dbproduto);
 			}
 		});
 		btnExcluir.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -87,7 +88,7 @@ public class TelaEstoque {
 		JButton btnAlterar = new JButton("Alterar");
 		btnAlterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new AlterarEstoque().open();
+				new AlterarEstoque(dbproduto).open(dbproduto);
 			}
 		});
 		btnAlterar.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -96,12 +97,22 @@ public class TelaEstoque {
 		frmEstoque.getContentPane().add(btnAlterar);
 		
 		JButton btnListarTodos = new JButton("Listar Todos");
+		btnListarTodos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ListarEstoque(dbproduto).open(dbproduto);
+			}
+		});
 		btnListarTodos.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnListarTodos.setBackground(new Color(135, 206, 250));
 		btnListarTodos.setBounds(10, 147, 100, 23);
 		frmEstoque.getContentPane().add(btnListarTodos);
 		
 		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmEstoque.setVisible(false);
+			}
+		});
 		btnVoltar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnVoltar.setBackground(new Color(135, 206, 250));
 		btnVoltar.setBounds(10, 181, 100, 23);
