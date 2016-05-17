@@ -20,11 +20,12 @@ public class RelatorioFinanceiro {
 	private JTextField txtDataInicial;
 	private JTextField txtDataFinal;
 	private JTable table;
+	private JTable table_1;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void open() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -112,14 +113,15 @@ public class RelatorioFinanceiro {
 		lblVendasPorPerodo.setBounds(26, 200, 95, 23);
 		frmRelatrioFinanceiro.getContentPane().add(lblVendasPorPerodo);
 		
-		table = new JTable();
-		table.setBounds(26, 227, 388, 181);
-		frmRelatrioFinanceiro.getContentPane().add(table);
 		
 		JButton btnOk = new JButton("OK");
 		btnOk.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnOk.setBackground(new Color(135, 206, 250));
 		btnOk.setBounds(162, 427, 110, 23);
 		frmRelatrioFinanceiro.getContentPane().add(btnOk);
+		
+		table_1 = new JTable();
+		table_1.setBounds(26, 229, 382, 185);
+		frmRelatrioFinanceiro.getContentPane().add(table_1);
 	}
 }

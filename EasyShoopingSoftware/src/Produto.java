@@ -3,16 +3,15 @@ public class Produto
    // Atributo
 	private String nome;
 	private int id;
-	private int qte;
-	private int qte_min;
-	private int unidade;
-	private int preco_venda;
-	private int preco_compra;
-	private String classificacao;
-   
-   
+	private double qte;
+	private double qte_min;
+	private String unidade;
+	private double preco_venda;
+	private double preco_compra;
+	private String classificacao;   
+	
    // Construtor
-   Produto (int i, String n, int q, int qm, int u, int pv, int pc, String c) {
+   Produto (int i, String n, double q, double qm, String u, double pv, double pc, String c) {
       id = i;
       qte = q;
       qte_min = qm;
@@ -39,23 +38,23 @@ public class Produto
       id = a;
    }
    
-   public void setQte (int q) {
+   public void setQte (double q) {
 	   qte = q;
    }
    
-   public void setQte_min (int qm) {
+   public void setQte_min (double qm) {
 	   qte_min = qm;
    }
    
-   public void setUnidade (int u) {
+   public void setUnidade (String u) {
 	   unidade = u;
    }
    
-   public void setPreco_venda (int pv) {
+   public void setPreco_venda (double pv) {
 	   preco_venda = pv;
    }
    
-   public void setPreco_compra (int pc) {
+   public void setPreco_compra (double pc) {
 	   preco_compra = pc;
    }
       
@@ -69,23 +68,23 @@ public class Produto
       return id;
    }
    
-   public int getQte() {
+   public double getQte() {
 	   return qte;
    }
    
-   public int getQte_min() {
+   public double getQte_min() {
 	   return qte_min;
    }
    
-   public int getUnidade() {
+   public String getUnidade() {
 	   return unidade;
    }
    
-   public int getPreco_venda() {
+   public double getPreco_venda() {
 	   return preco_venda;
    }
    
-   public int getPreco_compra() {
+   public double getPreco_compra() {
 	   return preco_compra;
    }
    

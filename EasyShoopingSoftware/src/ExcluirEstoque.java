@@ -187,11 +187,11 @@ public class ExcluirEstoque {
 				
 				if (produto != null) {
 					lblstatus1.setText("OK");
-					lblquant.setText(Integer.toString(produto.getQte()));
-					lblquantmin.setText(Integer.toString(produto.getQte_min()));
-					lblunid.setText(Integer.toString(produto.getUnidade()));
-					lblpv.setText(Integer.toString(produto.getPreco_venda()));
-					lblpc.setText(Integer.toString(produto.getPreco_compra()));
+					lblquant.setText(Double.toString(produto.getQte()));
+					lblquantmin.setText(Double.toString(produto.getQte_min()));
+					lblunid.setText(produto.getUnidade());
+					lblpv.setText(Double.toString(produto.getPreco_venda()));
+					lblpc.setText(Double.toString(produto.getPreco_compra()));
 					lblc.setText(produto.getClassificacao());
 				}
 				else{

@@ -6,7 +6,9 @@ import javax.swing.JPanel;
 
 import java.awt.Window.Type;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -49,8 +51,13 @@ public class TelaFuncionario {
 		frmFuncionario.setType(Type.UTILITY);
 		frmFuncionario.setBounds(100, 100, 450, 300);
 		frmFuncionario.getContentPane().setLayout(null);
-		
 		frmFuncionario.setSize(120, 250);
+		
+		Dimension screenSize = new Dimension(Toolkit.getDefaultToolkit().getScreenSize());
+        Dimension windowSize = new Dimension(120, 250);
+        int wdwLeft = 300 + screenSize.width / 2 - windowSize.width / 2;
+        int wdwTop = screenSize.height / 2 - windowSize.height / 2;
+        frmFuncionario.setLocation(wdwLeft, wdwTop);
 		
 		JButton btnIncluir = new JButton("Incluir");
 		btnIncluir.addActionListener(new ActionListener() {

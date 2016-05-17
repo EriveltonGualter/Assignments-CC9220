@@ -140,9 +140,10 @@ public class IncluirFuncionario {
 				String nome = txtnome.getText();
 				String turno = txtturno.getText();
 				String funcao = txtfuncao.getText();
+				String senha = txtsenha.getText();
 				int idade = Integer.parseInt(txtidade.getText());
 				
-				if(dbpessoa.incluir(cpf, nome, funcao, turno, idade))
+				if(dbpessoa.incluir(cpf, nome, funcao, turno, idade, senha))
 					lblstatus.setText("INSERIDA");
                 else
                 	lblstatus.setText("NÃO INSERIDA");				

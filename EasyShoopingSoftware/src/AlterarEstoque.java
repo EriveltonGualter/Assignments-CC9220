@@ -189,11 +189,11 @@ public class AlterarEstoque {
 				
 				if (produto != null) {
 					txtnome.setText(produto.getNome());
-					txtquantidade.setText(Integer.toString(produto.getQte()));
-					txtqteMin.setText(Integer.toString(produto.getQte_min()));
-					txtunidade.setText(Integer.toString(produto.getUnidade()));
-					txtpreoDaVenda.setText(Integer.toString(produto.getPreco_venda()));
-					txtprecocompra.setText(Integer.toString(produto.getPreco_compra()));
+					txtquantidade.setText(Double.toString(produto.getQte()));
+					txtqteMin.setText(Double.toString(produto.getQte_min()));
+					txtunidade.setText(produto.getUnidade());
+					txtpreoDaVenda.setText(Double.toString(produto.getPreco_venda()));
+					txtprecocompra.setText(Double.toString(produto.getPreco_compra()));
 					txtclassificao.setText(produto.getClassificacao());
 					lblstatus.setText("Valido");
 				}
@@ -229,7 +229,7 @@ public class AlterarEstoque {
 				String nome = txtnome.getText();
 				int qte = Integer.parseInt(txtquantidade.getText());
 				int qte_min = Integer.parseInt(txtqteMin.getText());
-				int unidade = Integer.parseInt(txtunidade.getText());
+				String unidade = txtunidade.getText();
 				int preco_venda = Integer.parseInt(txtpreoDaVenda.getText());
 				int preco_compra = Integer.parseInt(txtprecocompra.getText());
 				String classificacao = txtclassificao.getText();

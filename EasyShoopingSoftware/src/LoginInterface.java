@@ -16,8 +16,16 @@ public class LoginInterface extends JFrame implements ActionListener {
 		
 	JButton botaoEnter	 		= new JButton("Enter");
 	
+	PessoaDB dbpessoa;
+	ProdutoDB dbproduto;
+	DBListaTemp dblista;
+	
 	public LoginInterface() { // construtor
-
+		
+		dbpessoa = new PessoaDB();
+		dbproduto = new ProdutoDB();
+		dblista = new DBListaTemp();
+		 
 		Container caixa = getContentPane();
 		caixa.setLayout(new GridLayout(7, 1));		// Define size of the Layout 5x3
 
@@ -37,6 +45,7 @@ public class LoginInterface extends JFrame implements ActionListener {
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
+		setLocationRelativeTo(null);
 
 	} // end construtor PessoaInterfaceGrafico
 
@@ -45,48 +54,32 @@ public class LoginInterface extends JFrame implements ActionListener {
 		if (evento.getSource() == botaoEnter) {
 			String usuario = textoUsuario.getText();
 			char[] senha = passwordField.getPassword();
+			String s = String.valueOf(senha);
 			
-			if (passwordVerify(senha))
-			{
-				this.setVisible(false);
-			   	new TelaGerente().setVisible(true);
-				rotuloStatus.setText("SENHA CORRETA");
+			switch (dbpessoa.checkUsuario(usuario, s)) {
+				case 0:	// usuario Incorreto
+					rotuloStatus.setText("USUARIO INCORRETA");
+					break;
+				case 1:	// Senha Incorreta
+					rotuloStatus.setText("SENHA INCORRETA");
+					break;
+				case 2:	// Correto Outros
+					rotuloStatus.setText("SENHA CORRETA - Caixa");
+					new TelaPrincipalFuncionario(dbproduto, dbpessoa, dblista).open(dbproduto, dbpessoa, dblista);
+					setVisible(false);
+					break;
+				case 3:	// Correto Gerente
+					this.setVisible(false);
+				   	new TelaGerente(dbpessoa, dbproduto).setVisible(true);
+					rotuloStatus.setText("SENHA CORRETA - Gerente");
+					setVisible(false);
+					break;
+				default:
+					break;
 			}
-			else
-				rotuloStatus.setText("Senha INCORRETA");
-			//rotuloStatus.setText("Botão ENTER Pressionado");
 		}
 
 	} // end actionPerformed
-	
-	private static boolean loginVerify (String input) {
-        boolean isCorrect = true;
-        String correctLogin = "erivelton";
-
-        if (input.equals(correctLogin)) {
-            isCorrect = true;
-        } else {
-            isCorrect = false;
-        }
-        
-        return isCorrect;
-    }
-    
-    private static boolean passwordVerify (char[] input) {
-        boolean isCorrect = true;
-        char[] correctPassword = { 'e', 'r', 'i', 'v', 'e', 'l', 't', 'o', 'n' };
-
-        if (input.length != correctPassword.length) {
-            isCorrect = false;
-        } else {
-            isCorrect = Arrays.equals (input, correctPassword);
-        }
-        
-        //Zero out the password.
-        Arrays.fill(correctPassword,'0');
-
-        return isCorrect;
-    }
 	
 	public static void main(String args[]) {
 		LoginInterface loginInterface = new LoginInterface();

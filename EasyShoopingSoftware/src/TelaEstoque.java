@@ -6,7 +6,9 @@ import javax.swing.JPanel;
 
 import java.awt.Window.Type;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -42,6 +44,7 @@ public class TelaEstoque {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize(ProdutoDB dbproduto) {
+		       
 		frmEstoque = new JFrame();
 		frmEstoque.setFont(new Font("Dialog", Font.BOLD, 12));
 		frmEstoque.getContentPane().setBackground(new Color(248, 248, 255));
@@ -49,8 +52,14 @@ public class TelaEstoque {
 		frmEstoque.setType(Type.UTILITY);
 		frmEstoque.setBounds(100, 100, 450, 300);
 		frmEstoque.getContentPane().setLayout(null);
-		
 		frmEstoque.setSize(120, 250);
+		
+		Dimension screenSize = new Dimension(Toolkit.getDefaultToolkit().getScreenSize());
+        Dimension windowSize = new Dimension(120, 250);
+        int wdwLeft = -300 + screenSize.width / 2 - windowSize.width / 2;
+        int wdwTop = screenSize.height / 2 - windowSize.height / 2;
+        frmEstoque.setLocation(wdwLeft, wdwTop);
+        
 		
 		JButton btnIncluir = new JButton("Incluir");
 		btnIncluir.addActionListener(new ActionListener() {

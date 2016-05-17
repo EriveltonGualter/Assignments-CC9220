@@ -6,14 +6,16 @@ public class Pessoa
    private String funcao;
    private String turno;
    private int idade;
+   private String senha;
 
    // Construtor
-   Pessoa (String c, String n, String f, String t, int i) {
+   Pessoa (String c, String n, String f, String t, int i, String s) {
       cpf = c;
       nome = n;
       funcao = f;
       turno = t;
       idade = i;
+      senha = s;
    }
    Pessoa() {
    }
@@ -39,6 +41,14 @@ public class Pessoa
    
    public void setIdade (int i) {
 	   idade = i;
+   }
+   
+   public void setSenha(String s) {
+	   senha = s;
+   }
+   
+   public String getSenha() {
+	   return senha;
    }
    
    public String getCpf()

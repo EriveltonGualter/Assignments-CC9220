@@ -214,7 +214,7 @@ public class IncluirEstoque {
 				String nome = txtnome.getText();
 				int qte = Integer.parseInt(txtquantidade.getText());
 				int qte_min = Integer.parseInt(txtqteMin.getText());
-				int unidade = Integer.parseInt(txtunidade.getText());
+				String unidade = txtunidade.getText();
 				int preco_venda = Integer.parseInt(txtpreoDaVenda.getText());
 				int preco_compra = Integer.parseInt(txtprecoComrpa.getText());
 				String classificacao = txtclassificao.getText();

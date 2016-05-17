@@ -14,10 +14,10 @@ public class TelaGerente extends JFrame implements ActionListener {
 	JLabel rVazio1 		= new JLabel("");
 	JLabel rVazio2 		= new JLabel("");
 	
-    PessoaDB dbpessoa 	= new PessoaDB();
-    ProdutoDB dbproduto = new ProdutoDB();
+	private PessoaDB dbpessoa;
+	private ProdutoDB dbproduto;
 	
-	public TelaGerente() {
+	public TelaGerente(PessoaDB dbpessoa, ProdutoDB dbproduto) {
 		
 		Container windows = getContentPane();
 		windows.setLayout(new GridLayout(3, 2));
@@ -36,11 +36,15 @@ public class TelaGerente extends JFrame implements ActionListener {
 		
 		TelaEstoque 	telaEstoque 	= new TelaEstoque(dbproduto);
 		TelaFuncionario telaFuncionario = new TelaFuncionario(dbpessoa);
-		
+        
 		setTitle("Tela Principal - Gerente");
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
+		setLocationRelativeTo(null);
+		
+		this.dbpessoa = dbpessoa;
+		this.dbproduto = dbproduto;
 	}
 	
 	public void actionPerformed(ActionEvent evento) {
@@ -52,15 +56,17 @@ public class TelaGerente extends JFrame implements ActionListener {
 			TelaFuncionario.open(dbpessoa);
 		   	
 		} else if (evento.getSource() == btnFinanceiro) {
+			RelatorioFinanceiro.open();
 			
 		} else if (evento.getSource() == btnLogoff) {
 			setVisible(false); 
 			dispose();
+			new LoginInterface();
 		}
 	}
 	
-	public static void main(String args[]) {
-		TelaGerente telaGerente = new TelaGerente();
+	public void open(PessoaDB dbpessoa, ProdutoDB dbproduto) {
+		TelaGerente telaGerente = new TelaGerente(dbpessoa, dbproduto);
 	}
 
 }

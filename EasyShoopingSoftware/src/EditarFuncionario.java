@@ -145,9 +145,10 @@ public class EditarFuncionario {
 				String nome = txtnome.getText();
 				String funcao = txtfuncao.getText();
 				String turno = txtturno.getText();
+				String senha = txtsenha.getText();
 				int idade = Integer.parseInt(txtidade.getText());
 				
-                if (dbpessoa.alterar(cpf, nome, funcao, turno, idade)) {
+                if (dbpessoa.alterar(cpf, nome, funcao, turno, idade, senha)) {
                 	lbl_status2.setText("Alterado");
                 }
                 else {
@@ -174,6 +175,7 @@ public class EditarFuncionario {
 					txtfuncao.setText(pessoa.getFuncao());
 					txtturno.setText(pessoa.getTurno());
 					txtidade.setText(Integer.toString(pessoa.getIdade()));
+					txtsenha.setText(pessoa.getSenha());
 				}
 				else{
 					lbl_status1.setText("NAO EXISTE");

@@ -181,13 +181,14 @@ public class ConsultarEstoque {
 				
 				if (produto != null) {
 					lbnome.setText(produto.getNome());
-					lblqte.setText(Integer.toString(produto.getQte()));
-					lblqtemin.setText(Integer.toString(produto.getQte_min()));
-					lblunid.setText(Integer.toString(produto.getUnidade()));
-					lblpv.setText(Integer.toString(produto.getPreco_venda()));
-					lblpc.setText(Integer.toString(produto.getPreco_compra()));
+					lblqte.setText(Double.toString(produto.getQte()));
+					lblqtemin.setText(Double.toString(produto.getQte_min()));
+					lblunid.setText(produto.getUnidade());
+					lblpv.setText(Double.toString(produto.getPreco_venda()));
+					lblpc.setText(Double.toString(produto.getPreco_compra()));
 					lblclassificacao.setText(produto.getClassificacao());
 					lblstatus.setText("Valido");
+					
 				}
 				else{
 					lblstatus.setText("NAO EXISTE");

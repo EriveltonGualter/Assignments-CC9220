@@ -17,7 +17,7 @@ public class ChamarGerente {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public void open() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -46,6 +46,7 @@ public class ChamarGerente {
 		frmChamarGerente.setBounds(100, 100, 312, 155);
 		frmChamarGerente.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmChamarGerente.getContentPane().setLayout(null);
+		frmChamarGerente.setLocationRelativeTo(null);
 		
 		JLabel lblSolicitaoEnviada = new JLabel("Solicita\u00E7\u00E3o Enviada");
 		lblSolicitaoEnviada.setHorizontalAlignment(SwingConstants.CENTER);
